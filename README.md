@@ -41,4 +41,40 @@
         return res
             
  
-# recursion：
+# recursion - simple：
+
+        class Solution:
+            def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+
+                if not root:
+                    return []
+
+                return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
+                
+                这里的recursion是以一个三角形为单位：
+                            root
+                          /      \
+                     root.left  root.right
+                
+                那么走到root.left的时候，重新跑一遍本程序，而此时的root = root.left
+                            root（root.left above）
+                          /      \
+                     root.left  root.right
+                   
+                所以这个是dfv, 也是preorder。
+                
+                          
+# recursion - 初学者：
+
+                def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        
+                    output = []
+                    self.dfs(root, output)      // 这个功能我们写在下面
+                    return output
+
+                def dfs(self, root, output):   // 新定义的跑左跑右
+                    if root:
+                        output.append(root.val)   // 结果加上root.val
+                        self.dfs(root.left, output)  //左边加到output后面？？？
+                        self.dfs(root.right, output)
+
