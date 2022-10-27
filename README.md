@@ -1,7 +1,7 @@
 # leetcode144-binaryStack
 
 
-iteration:
+# iterative:
 
     class Solution:
         def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
@@ -20,7 +20,25 @@ iteration:
 
             return output
             
-            所以提取的时候先出来左边，再来右边。左边的变成下一个root，往下run
+            key points:
+            1) 所以提取的时候先出来左边，再来右边。左边的变成下一个root，往下run 
+            2) 注意if里面是先放在stack里面，然后root=stack.pop()是在帮忙提取里面的值 
+            
+            
+# Iterative- Simple:
+     
+        stack = [root]                    // 起始值为第一个root
+        res = []
+        
+        while stack:
+            cur = stack.pop()            // 每次拿出的值，加在res里面
+            
+            if cur:
+                res.append(cur.val)      // 反正每次加cur.val
+                stack.append(cur.right)
+                stack.append(cur.left)
+                
+        return res
             
  
- recursion：
+# recursion：
